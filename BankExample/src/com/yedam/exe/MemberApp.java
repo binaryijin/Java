@@ -2,8 +2,13 @@ package com.yedam.exe;
 
 import java.util.Scanner;
 
+import com.yedam.account.AccountService;
+import com.yedam.member.MemberService;
+
 public class MemberApp {
 	Scanner sc = new Scanner(System.in);
+	MemberService ms = new MemberService();
+	AccountService as = new AccountService();
 	
 	public MemberApp() {
 		memberRun();
@@ -18,13 +23,18 @@ public class MemberApp {
 
 			switch (selectNo) {
 			case "1":
+				ms.getAccountInfo();
 				break;
 			case "2":
+				as.inoutMoney();
 				break;
 			case "3":
+				as.transferMoney();
 				break;
 			case "4":
 				flag = false;
+				MemberService.memberInfo = null;
+				System.out.println("개인 업무 종료");
 				break;
 			}
 		}
