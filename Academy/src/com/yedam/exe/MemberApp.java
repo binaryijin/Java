@@ -41,7 +41,7 @@ public class MemberApp {
 				System.out.println("입력 >");
 				menu = sc.nextLine();
 				if(menu.equals("1")) {
-					
+					ms.insertCourse();
 				}else if(menu.equals("2")) {
 					
 				}

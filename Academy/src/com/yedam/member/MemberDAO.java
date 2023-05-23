@@ -1,6 +1,9 @@
 package com.yedam.member;
 
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import com.yedam.common.DAO;
 
 public class MemberDAO extends DAO {
@@ -31,7 +34,6 @@ public class MemberDAO extends DAO {
 				member.setMemberId(id);
 				member.setMemberPw(rs.getString("member_pw"));
 				member.setMemberName(rs.getString("member_name"));
-				member.setMemberPhone(rs.getString("member_phone"));
 				member.setMemberAuth(rs.getString("member_auth"));
 			}
 		} catch (Exception e) {
@@ -48,12 +50,11 @@ public class MemberDAO extends DAO {
 		int result = 0;
 		try {
 			conn();
-			String sql = "INSERT INTO member VALUES(?, ?, ?, ?, 'S')";
+			String sql = "INSERT INTO member VALUES(?, ?, ?, 'S')";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPw());
 			pstmt.setString(3, member.getMemberName());
-			pstmt.setString(4, member.getMemberPhone());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,14 +65,23 @@ public class MemberDAO extends DAO {
 	}
 	
 	//수강신청
-	public int insertCourse(Member member, int select) {
+	public int insertCourse(Member member, int selectLevel, int selectDuration) {
 		int result = 0;
 		try {
 			conn();
-			String sql = "INSERT INTO courseinfo VALUES(?, ?, sysdate, ?, null, null)";
+//			String sql = "INSERT INTO courseinfo (member_id, lavel_id, start_date, end_date) VALUES (?, ?, SYSDATE, ?)";
+			String sql = "INSERT INTO courseinfo VALUES (?, ?, sysdate, ?, null, null)";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberId());
-			
+            pstmt.setInt(2, selectLevel);
+            
+            Calendar endDate = Calendar.getInstance();
+            endDate.add(Calendar.MONTH, selectDuration);
+            
+            pstmt.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
+            
+            result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -33,27 +33,26 @@ public class MemberService {
 	public void insertMember() {
 		Member member = new Member();
 		
-		System.out.println("[ 회 원 가 입 ]");		
-		String id = "";
-		while(true) {
-			System.out.println("ID>");
-			id = sc.nextLine();
-			member = MemberDAO.getInstance().login(id);
-			if(member != null) {
-				System.out.println("존재하는 ID 입니다.");
-			}else if(member == null) {
-				System.out.println("사용 가능한 ID 입니다.");
-				break;
-			}
-		}
+		System.out.println("[ 회 원 가 입 ]");	
+		System.out.println("ID>");
+		member.setMemberId(sc.nextLine());
+//		String id = "";
+//		while(true) {
+//			System.out.println("ID>");
+//			id = sc.nextLine();
+//			member = MemberDAO.getInstance().login(id);
+//			if(member != null) {
+//				System.out.println("존재하는 ID 입니다.");
+//			}else if(member == null) {
+//				System.out.println("사용 가능한 ID 입니다.");
+//				break;
+//			}
+//		}
 		System.out.println("PW > ");
 		member.setMemberPw(sc.nextLine());
 		
 		System.out.println("NAME > ");
 		member.setMemberName(sc.nextLine());
-		
-		System.out.println("PHONE > ");
-		member.setMemberPhone(sc.nextLine());
 		
 		int result = MemberDAO.getInstance().insertMember(member);
 		
@@ -71,14 +70,27 @@ public class MemberService {
 		System.out.println("ID : " + member.getMemberId());
 		System.out.println("PW : " + member.getMemberPw());
 		System.out.println("NAME : " + member.getMemberName());
-		System.out.println("PHONE : " + member.getMemberPhone());
 	}
 	
+	//수강신청
 	public void insertCourse() {
 		System.out.println("[ 수 강 신 청 ]");
 		System.out.println("과목을 선택하세요.");
 		System.out.println("1. Beginner | 2. Basic | 3. Intermediate | 4. Advanced");
-		int select = Integer.parseInt(sc.nextLine());
+		int selectLevel = sc.nextInt();
+
+		System.out.println("수강기간을 선택하세요.");
+		System.out.println("1. 1개월 | 2. 2개월 | 3. 6개월");
+		int selectDuration = sc.nextInt();
+
+		Member member = new Member();
 		
+		int result = MemberDAO.getInstance().insertCourse(member, selectLevel, selectDuration);
+		
+		if (result > 0) {
+	        System.out.println("수강 신청 완료");
+	    } else {
+	        System.out.println("수강 신청 실패");
+	    }
 	}
 }

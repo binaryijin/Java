@@ -7,60 +7,39 @@ public class Member {
 //			member_id varchar2(10) primary key,
 //			member_pw varchar2(10),
 //			member_name varchar2(10),
-//			member_phone varchar2(13),
 //			member_auth char(1));
 	
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private String memberPhone;
-	private String MemberAuth;
+	private String memberAuth;
 	
-//	member_id varchar2(10) references member(member_id),
-//	course_level varchar2(10),
-//	courseinfo_start date,
-//	courseinfo_end date,
-//	courseinfo_test varchar2(10),
-//	courseinfo_result varchar2(10)
+//	member_id varchar2(20) primary Key,
+//	lavel_id number(1),
+//	start_date date ,
+//	end_date date,
+//	test_target varchar2(20),
+//	test_result varchar2(20),
+//	foreign key (member_id) references member(member_id),
+//	foreign key (lavel_id) references lavel(lavel_id));
 	
-	private String course_level;
-	private Date courseinfo_start;
-	private Date courseinfo_end;
-	private String course_test;
-	private String courseinfo_result;
+	private int lavel_id;
+	private Date start_date;
+	private Date end_date;
+	private String test_target;
+	private String test_result;
 	
+//	lavel_id number(1) primary key,
+//	lavel_name varchar2(20));
 	
-	public String getCourse_level() {
-		return course_level;
-	}
-	public void setCourse_level(String course_level) {
-		this.course_level = course_level;
-	}
-	public Date getCourseinfo_start() {
-		return courseinfo_start;
-	}
-	public void setCourseinfo_start(Date courseinfo_start) {
-		this.courseinfo_start = courseinfo_start;
-	}
-	public Date getCourseinfo_end() {
-		return courseinfo_end;
-	}
-	public void setCourseinfo_end(Date courseinfo_end) {
-		this.courseinfo_end = courseinfo_end;
-	}
-	public String getCourse_test() {
-		return course_test;
-	}
-	public void setCourse_test(String course_test) {
-		this.course_test = course_test;
-	}
-	public String getCourseinfo_result() {
-		return courseinfo_result;
-	}
-	public void setCourseinfo_result(String courseinfo_result) {
-		this.courseinfo_result = courseinfo_result;
-	}
+	private int lavelId;
+	private String lavelName;
 	
+//	duration_id number(1) primary key,
+//	duration_months number(1) not null);
+	
+	private int durationId;
+	private int durationMonths;
 	
 	public String getMemberId() {
 		return memberId;
@@ -80,17 +59,65 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public String getMemberPhone() {
-		return memberPhone;
-	}
-	public void setMemberPhone(String memberPhone) {
-		this.memberPhone = memberPhone;
-	}
 	public String getMemberAuth() {
-		return MemberAuth;
+		return memberAuth;
 	}
 	public void setMemberAuth(String memberAuth) {
-		MemberAuth = memberAuth;
+		this.memberAuth = memberAuth;
+	}
+	public int getLavel_id() {
+		return lavel_id;
+	}
+	public void setLavel_id(int lavel_id) {
+		this.lavel_id = lavel_id;
+	}
+	public Date getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+	public Date getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+	public String getTest_target() {
+		return test_target;
+	}
+	public void setTest_target(String test_target) {
+		this.test_target = test_target;
+	}
+	public String getTest_result() {
+		return test_result;
+	}
+	public void setTest_result(String test_result) {
+		this.test_result = test_result;
+	}
+	public int getLavelId() {
+		return lavelId;
+	}
+	public void setLavelId(int lavelId) {
+		this.lavelId = lavelId;
+	}
+	public String getLavelName() {
+		return lavelName;
+	}
+	public void setLavelName(String lavelName) {
+		this.lavelName = lavelName;
+	}
+	public int getDurationId() {
+		return durationId;
+	}
+	public void setDurationId(int durationId) {
+		this.durationId = durationId;
+	}
+	public int getDurationMonths() {
+		return durationMonths;
+	}
+	public void setDurationMonths(int durationMonths) {
+		this.durationMonths = durationMonths;
 	}
 	
 	
