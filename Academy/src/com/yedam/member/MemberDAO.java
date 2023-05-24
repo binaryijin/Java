@@ -45,7 +45,6 @@ public class MemberDAO extends DAO {
 	}
 	
 	//회원 가입
-	
 	public int insertMember(Member member) {
 		int result = 0;
 		try {
@@ -64,20 +63,67 @@ public class MemberDAO extends DAO {
 		return result;
 	}
 	
-	//수강신청
-	public int insertCourse(Member member, int selectLevel, int selectDuration) {
+	//내 정보 조회 - 수강 정보 조회
+	public Member getCourseInfo (String id) {
+		Member member = null;
+		try {
+			conn();
+			String sql = "select * from courseinfo where member_id =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new Member();
+				member.setMemberId(id);
+				member.setLevelId(rs.getInt("level_id"));
+				member.setStartDate(rs.getDate("start_date"));
+				member.setEndDate(rs.getDate("end_date"));
+				member.setTestTarget(rs.getString("test_target"));
+				member.setTestResult(rs.getString("test_result"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return member;
+	}
+	//비밀번호 수정
+	public int updatePw(Member member) {
 		int result = 0;
 		try {
 			conn();
-//			String sql = "INSERT INTO courseinfo (member_id, lavel_id, start_date, end_date) VALUES (?, ?, SYSDATE, ?)";
+			String sql = "UPDATE member SET member_pw = ? where member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+
+	//수강신청
+	public int insertCourse( int selectLevel, int selectDuration) {
+		int result = 0;
+		try {
+			conn();
+//			String sql = "INSERT INTO courseinfo (member_id, level_id, start_date, end_date) VALUES (?, ?, SYSDATE, ?)";
 			String sql = "INSERT INTO courseinfo VALUES (?, ?, sysdate, ?, null, null)";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
             pstmt.setInt(2, selectLevel);
             
             Calendar endDate = Calendar.getInstance();
             endDate.add(Calendar.MONTH, selectDuration);
+            
             
             pstmt.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
             
@@ -90,6 +136,43 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+//	public int insertCourse(Member member, int selectLevel, int selectDuration) {
+//		int result = 0;
+//		try {
+//			conn();
+////			String sql = "INSERT INTO courseinfo (member_id, level_id, start_date, end_date) VALUES (?, ?, SYSDATE, ?)";
+//			String sql = "INSERT INTO courseinfo VALUES (?, ?, ?, sysdate, ?, null, null)";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+//            pstmt.setInt(2, selectLevel);
+//            pstmt.setString(3, me);
+//            
+//            Calendar endDate = Calendar.getInstance();
+//            endDate.add(Calendar.MONTH, selectDuration);
+//            
+//            
+//            pstmt.setDate(4, new Date(endDate.getInstance().getTimeInMillis()));
+//            
+//            result = pstmt.executeUpdate();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			disconn();
+//		}
+//		return result;
+//	}
 	
 	//내 정보 조회
 //	public List<Member> getMemberInfo(){

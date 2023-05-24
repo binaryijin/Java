@@ -40,6 +40,7 @@ public class Application {
 				if(MemberService.memberInfo.getMemberAuth().equals("S")) {
 					new MemberApp();
 				}else if(MemberService.memberInfo.getMemberAuth().equals("M")) {
+					new ManagerApp();
 				}
 			}
 		}

@@ -15,25 +15,25 @@ public class Member {
 	private String memberAuth;
 	
 //	member_id varchar2(20) primary Key,
-//	lavel_id number(1),
-//	start_date date ,
+//	level_id number(1),
+//	start_date date,
 //	end_date date,
 //	test_target varchar2(20),
 //	test_result varchar2(20),
 //	foreign key (member_id) references member(member_id),
-//	foreign key (lavel_id) references lavel(lavel_id));
+//	foreign key (level_id) references course_level(level_id));
+
 	
-	private int lavel_id;
-	private Date start_date;
-	private Date end_date;
-	private String test_target;
-	private String test_result;
+	private int levelId;
+	private Date startDate;
+	private Date endDate;
+	private String testTarget;
+	private String testResult;
 	
-//	lavel_id number(1) primary key,
-//	lavel_name varchar2(20));
+//	level_id number(1) primary key,
+//	level_name varchar2(20))
 	
-	private int lavelId;
-	private String lavelName;
+	private String levelName;
 	
 //	duration_id number(1) primary key,
 //	duration_months number(1) not null);
@@ -65,47 +65,41 @@ public class Member {
 	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
 	}
-	public int getLavel_id() {
-		return lavel_id;
+	public int getLevelId() {
+		return levelId;
 	}
-	public void setLavel_id(int lavel_id) {
-		this.lavel_id = lavel_id;
+	public void setLevelId(int levelId) {
+		this.levelId = levelId;
 	}
-	public Date getStart_date() {
-		return start_date;
+	public Date getStartDate() {
+		return startDate;
 	}
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
-	public Date getEnd_date() {
-		return end_date;
+	public Date getEndDate() {
+		return endDate;
 	}
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
-	public String getTest_target() {
-		return test_target;
+	public String getTestTarget() {
+		return testTarget;
 	}
-	public void setTest_target(String test_target) {
-		this.test_target = test_target;
+	public void setTestTarget(String testTarget) {
+		this.testTarget = testTarget;
 	}
-	public String getTest_result() {
-		return test_result;
+	public String getTestResult() {
+		return testResult;
 	}
-	public void setTest_result(String test_result) {
-		this.test_result = test_result;
+	public void setTestResult(String testResult) {
+		this.testResult = testResult;
 	}
-	public int getLavelId() {
-		return lavelId;
+	public String getLevelName() {
+		return levelName;
 	}
-	public void setLavelId(int lavelId) {
-		this.lavelId = lavelId;
-	}
-	public String getLavelName() {
-		return lavelName;
-	}
-	public void setLavelName(String lavelName) {
-		this.lavelName = lavelName;
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
 	}
 	public int getDurationId() {
 		return durationId;
@@ -119,6 +113,9 @@ public class Member {
 	public void setDurationMonths(int durationMonths) {
 		this.durationMonths = durationMonths;
 	}
+	
+	
+	
 	
 	
 }
