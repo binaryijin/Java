@@ -77,7 +77,7 @@ public class MemberDAO extends DAO {
 				member.setMemberId(id);
 				member.setLevelId(rs.getInt("level_id"));
 				member.setStartDate(rs.getDate("start_date"));
-				member.setEndDate(rs.getDate("end_date"));
+				member.setDuration(rs.getInt("duration"));
 				member.setTestTarget(rs.getString("test_target"));
 				member.setTestResult(rs.getString("test_result"));
 			}
@@ -120,12 +120,7 @@ public class MemberDAO extends DAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, MemberService.memberInfo.getMemberId());
             pstmt.setInt(2, selectLevel);
-            
-            Calendar endDate = Calendar.getInstance();
-            endDate.add(Calendar.MONTH, selectDuration);
-            
-            
-            pstmt.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
+            pstmt.setInt(3, selectDuration);
             
             result = pstmt.executeUpdate();
 			

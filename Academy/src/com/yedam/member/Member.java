@@ -15,32 +15,18 @@ public class Member {
 	private String memberAuth;
 	
 //	member_id varchar2(20) primary Key,
-//	level_id number(1),
+//	lavel_id number(1),
 //	start_date date,
-//	end_date date,
+//	duration number(1),
 //	test_target varchar2(20),
 //	test_result varchar2(20),
-//	foreign key (member_id) references member(member_id),
-//	foreign key (level_id) references course_level(level_id));
 
 	
 	private int levelId;
 	private Date startDate;
-	private Date endDate;
+	private int duration;
 	private String testTarget;
 	private String testResult;
-	
-//	level_id number(1) primary key,
-//	level_name varchar2(20))
-	
-	private String levelName;
-	
-//	duration_id number(1) primary key,
-//	duration_months number(1) not null);
-	
-	private int durationId;
-	private int durationMonths;
-	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -77,11 +63,11 @@ public class Member {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
-		return endDate;
+	public int getDuration() {
+		return duration;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 	public String getTestTarget() {
 		return testTarget;
@@ -95,26 +81,8 @@ public class Member {
 	public void setTestResult(String testResult) {
 		this.testResult = testResult;
 	}
-	public String getLevelName() {
-		return levelName;
-	}
-	public void setLevelName(String levelName) {
-		this.levelName = levelName;
-	}
-	public int getDurationId() {
-		return durationId;
-	}
-	public void setDurationId(int durationId) {
-		this.durationId = durationId;
-	}
-	public int getDurationMonths() {
-		return durationMonths;
-	}
-	public void setDurationMonths(int durationMonths) {
-		this.durationMonths = durationMonths;
-	}
 	
-	
+
 	
 	
 	

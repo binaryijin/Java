@@ -27,7 +27,7 @@ public class ManagerService {
 				System.out.println("수강 레벨 : Advanced");
 			}
 			System.out.println("등록일 : " + list.get(i).getStartDate());
-			System.out.println("종료일 : " + list.get(i).getEndDate());
+			System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 			System.out.println("레벨 테스트 신청 대상 : " + list.get(i).getTestTarget());
 			System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
 		}
@@ -57,7 +57,7 @@ public class ManagerService {
 			System.out.println("ID : " + list.get(i).getMemberId());
 			System.out.println("이름 : " + list.get(i).getMemberName());
 			System.out.println("등록일 : " + list.get(i).getStartDate());
-			System.out.println("종료일 : " + list.get(i).getEndDate());
+			System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 			System.out.println("레벨 테스트 신청 대상 : " + list.get(i).getTestTarget());
 			System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
 		}

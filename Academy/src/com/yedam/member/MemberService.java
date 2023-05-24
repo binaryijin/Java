@@ -87,7 +87,7 @@ public class MemberService {
 			System.out.println("수강레벨 : Advanced");
 		}
 		System.out.println("등록일 : " + member.getStartDate());
-		System.out.println("종료일 : " + member.getEndDate());
+		System.out.println("등록 기간 : " + member.getDuration() + "개월");
 		System.out.println("레벨 테스트 신청 대상 : " + member.getTestTarget());
 		System.out.println("레벨 테스트 결과 : " + member.getTestResult());
 	}
@@ -132,7 +132,7 @@ public class MemberService {
 		int selectLevel = Integer.parseInt(sc.nextLine());
 
 		System.out.println("▽수강기간을 선택하세요.");
-		System.out.println("1. 1개월 | 2. 2개월 | 3. 6개월");
+		System.out.println("1. 1개월 | 2. 2개월 | 3. 3개월");
 		int selectDuration = Integer.parseInt(sc.nextLine());
 
 		int result = MemberDAO.getInstance().insertCourse(selectLevel, selectDuration);
