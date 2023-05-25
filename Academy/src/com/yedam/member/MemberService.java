@@ -237,6 +237,9 @@ public class MemberService {
 				System.out.println("수강 신청 실패");
 			}
 			
+//			https://developer-talk.tistory.com/409
+			
+			
 			
 //			if (result > 0) {
 //				if(selectLevel == 1) {
