@@ -24,7 +24,7 @@ public class ManagerDAO extends DAO{
 		Member member = null;
 		try {
 			conn();
-			String sql = "select m.member_id, m.member_name, c.level_id, c.start_date, c.duration, c.test_target, c.test_result\r\n"
+			String sql = "select m.member_id, m.member_name, c.level_id, c.start_date, c.duration, c.end_date,c.test_target, c.test_result\r\n"
 					+ "from member m join courseinfo c\r\n"
 					+ "on m.member_id = c.member_id order by m.member_id";
 
@@ -38,6 +38,7 @@ public class ManagerDAO extends DAO{
 				member.setLevelId(rs.getInt("level_id"));
 				member.setStartDate(rs.getDate("start_date"));
 				member.setDuration(rs.getInt("duration"));
+				member.setEndDate(rs.getString("end_date"));
 				member.setTestTarget(rs.getString("test_target"));
 				member.setTestResult(rs.getString("test_result"));
 
@@ -57,7 +58,7 @@ public class ManagerDAO extends DAO{
 		Member member = null;
 		try {
 			conn();
-			String sql = "select c.level_id, m.member_id, m.member_name, c.start_date, c.duration, c.test_target, c.test_result\r\n"
+			String sql = "select c.level_id, m.member_id, m.member_name, c.start_date, c.duration, c.end_date, c.test_target, c.test_result\r\n"
 					+ "from member m join courseinfo c\r\n"
 					+ "on m.member_id = c.member_id\r\n"
 					+ "where c.level_id = ? ";
@@ -72,6 +73,7 @@ public class ManagerDAO extends DAO{
 				member.setMemberName(rs.getString("member_name"));
 				member.setStartDate(rs.getDate("start_date"));
 				member.setDuration(rs.getInt("duration"));
+				member.setEndDate(rs.getString("end_date"));
 				member.setTestTarget(rs.getString("test_target"));
 				member.setTestResult(rs.getString("test_result"));
 
@@ -89,6 +91,7 @@ public class ManagerDAO extends DAO{
 	public int deleteMember(String id) {
 		int result = 0;
 		try {
+			//부모 테이블(member) 삭제 시, 자식 테이블도 같이 삭제됨(ON DELETE CASCADE)
 			conn();
 			String sql = "DELETE FROM member WHERE member_id = ? ";
 			pstmt = conn.prepareStatement(sql);

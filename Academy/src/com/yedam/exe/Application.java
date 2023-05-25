@@ -17,22 +17,21 @@ public class Application {
 	private void run() {
 		while(selectNo !=3 ) {
 			if(MemberService.memberInfo == null) {
+				System.out.println(" 🌷 🌷 🌷  영 어 학 원  🌷 🌷 🌷");
 				System.out.println("============================");
 				System.out.println("1. 로그인 | 2. 회원가입 | 3. 종료");
 				System.out.println("============================");
 				System.out.println("입력 > ");
 				selectNo = Integer.parseInt(sc.nextLine());
 
-				switch (selectNo) {
-				case 1:
+				if(selectNo == 1) {
 					ms.login();
-					break;
-				case 2:
+				}else if(selectNo == 2) {
 					ms.insertMember();
-					break;
-				case 3:
+				}else if(selectNo == 3) {
 					System.out.println("프로그램 종료");
-					break;
+				}else {
+					System.out.println("잘못 입력하셨습니다.");
 				}
 			}
 			if(MemberService.memberInfo != null) {
