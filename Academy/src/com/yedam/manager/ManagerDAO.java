@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.yedam.common.DAO;
 import com.yedam.member.Member;
+import com.yedam.member.MemberService;
 
 public class ManagerDAO extends DAO{
 	private static ManagerDAO mngDao = null;
@@ -95,7 +96,7 @@ public class ManagerDAO extends DAO{
 		Member member = null;
 		try {
 			conn();
-			String sql = "SELECT * FROM courseinfo WHERE test_apply = 'O' ";
+			String sql = "SELECT * FROM courseinfo WHERE test_apply = '신청 대기' ";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -119,8 +120,23 @@ public class ManagerDAO extends DAO{
 		return list;
 	}
 	
-	//레벨 테스트 신청 승인
-	
+	//레벨 테스트 신청 승인 !@!@@@@@@!!!!!!@@@@@@@@!!!!!!!!!!!
+	public int testApprove(Member member) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE courseinfo SET test_approve = ? WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "신청 완료");
+			pstmt.setString(2, MemberService.memberInfo.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
 	
 	
 	

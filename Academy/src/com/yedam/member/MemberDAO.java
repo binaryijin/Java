@@ -107,7 +107,7 @@ public class MemberDAO extends DAO {
 	}
 	
 
-	//수강 등록 유무 확인
+	//수강 등록 유무 확인 1@@@!!!!!!@@@@@@@@@!!!!!!없어도?
 	public Member checkCourse(String id) {
 		Member member = null;
 		try {
@@ -188,7 +188,7 @@ public class MemberDAO extends DAO {
 			conn();
 			String sql = "UPDATE courseinfo SET test_apply = ? WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "O");
+			pstmt.setString(1, "신청 대기");
 			pstmt.setString(2, MemberService.memberInfo.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {

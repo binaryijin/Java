@@ -1,5 +1,6 @@
 package com.yedam.manager;
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,7 +82,7 @@ public class ManagerService {
 				System.out.println("ID : " + list.get(i).getMemberId() + ", 수강 레벨 : " + list.get(i).getLevelId() + ", 등록 기간 : " + list.get(i).getDuration() + "개월, 종료일 : " + list.get(i).getEndDate());
 				System.out.println("--------------------------------------------------------------");
 				// 승인 하기
-
+				
 			}
 		}else {
 			System.out.println("레벨 테스트 신청자가 없습니다.");
