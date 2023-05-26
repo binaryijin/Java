@@ -25,12 +25,22 @@ public class Member {
 	private int levelId;
 	private Date startDate;
 	private int duration;
-	private String testTarget;
+	private String testApply;
 	private String testResult;
 	
 	
 	
 	private String endDate;
+	
+	private String testApprove;
+	
+	
+	public String getTestApprove() {
+		return testApprove;
+	}
+	public void setTestApprove(String testApprove) {
+		this.testApprove = testApprove;
+	}
 	public String getEndDate() {
 		return endDate;
 	}
@@ -82,11 +92,11 @@ public class Member {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	public String getTestTarget() {
-		return testTarget;
+	public String getTestApply() {
+		return testApply;
 	}
-	public void setTestTarget(String testTarget) {
-		this.testTarget = testTarget;
+	public void setTestApply(String testTarget) {
+		this.testApply = testTarget;
 	}
 	public String getTestResult() {
 		return testResult;

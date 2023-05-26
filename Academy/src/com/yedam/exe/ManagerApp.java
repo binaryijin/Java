@@ -36,6 +36,17 @@ public class ManagerApp {
 				}
 				break;
 			case 2:
+				System.out.println("==================================================");
+				System.out.println("1. 레벨 테스트 승인 | 2. 레벨 테스트 결과 입력 | 3. 뒤로 가기");
+				System.out.println("==================================================");
+				System.out.println("입력 >");
+				menu = sc.nextLine();
+				if(menu.equals("1")) {
+					mngs.getTestApply();
+				}else if(menu.equals("2")) {
+				}else if(menu.equals("3")) {
+					break;
+				}
 				break;
 			case 3:
 				mngs.deleteMember();

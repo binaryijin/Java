@@ -44,9 +44,9 @@ public class MemberApp {
 				System.out.println("입력 >");
 				menu = sc.nextLine();
 				if(menu.equals("1")) {
-					ms.insertCourse();
+					ms.checkCourse();
 				}else if(menu.equals("2")) {
-//					ms.test();
+					ms.testApply();
 				}else if(menu.equals("3")) {
 
 				}else if(menu.equals("4")) {

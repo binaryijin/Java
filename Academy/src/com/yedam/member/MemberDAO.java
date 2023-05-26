@@ -64,7 +64,7 @@ public class MemberDAO extends DAO {
 		Member member = null;
 		try {
 			conn();
-			String sql = "select * from courseinfo where member_id =?";
+			String sql = "SELECT * FROM courseinfo WHERE member_id =?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -75,7 +75,8 @@ public class MemberDAO extends DAO {
 				member.setStartDate(rs.getDate("start_date"));
 				member.setDuration(rs.getInt("duration"));
 				member.setEndDate(rs.getString("end_date"));
-				member.setTestTarget(rs.getString("test_target"));
+				member.setTestApply(rs.getString("test_apply"));
+				member.setTestApprove(rs.getString("test_approve"));
 				member.setTestResult(rs.getString("test_result"));
 			}
 		} catch (Exception e) {
@@ -90,7 +91,7 @@ public class MemberDAO extends DAO {
 		int result = 0;
 		try {
 			conn();
-			String sql = "UPDATE member SET member_pw = ? where member_id = ?";
+			String sql = "UPDATE member SET member_pw = ? WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberPw());
 			pstmt.setString(2, member.getMemberId());
@@ -106,12 +107,12 @@ public class MemberDAO extends DAO {
 	}
 	
 
-	//수강 신청 유무 확인
+	//수강 등록 유무 확인
 	public Member checkCourse(String id) {
 		Member member = null;
 		try {
 			conn();
-			String sql = "select * from courseinfo where member_id = ? ";
+			String sql = "SELECT * FROM courseinfo WHERE member_id = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, MemberService.memberInfo.getMemberId());
 			rs = pstmt.executeQuery();
@@ -130,13 +131,13 @@ public class MemberDAO extends DAO {
 		}
 		return member;
 	}
-	//수강신청 미완성!@!!!@!
+	
+	//수강 신청
 	public int insertCourse( int selectLevel, int selectDuration) {
 		int result = 0;
 		try {
 			conn();
-//			String sql = "INSERT INTO courseinfo VALUES (?, ?, sysdate, ?, null , null, null)"; //end_date 수정
-			String sql = "insert into courseinfo values(?, ?, sysdate, ?, to_char(add_months(sysdate, ?)), null, null)";
+			String sql = "INSERT INTO courseinfo VALUES(?, ?, sysdate, ?, to_char(add_months(sysdate, ?),'YYYY-MM-DD'),null, null, null)";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, MemberService.memberInfo.getMemberId());
@@ -154,31 +155,49 @@ public class MemberDAO extends DAO {
 		return result;
 	}
 	
-}
+	//재 수강 신청
+	public int updateCourse( int selectLevel, int selectDuration) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE courseinfo "
+					+ "SET level_id = ?, start_date = sysdate, duration = ?, end_date = to_char(add_months(sysdate, ?),'YYYY-MM-DD'),"
+					+ "test_apply = null, test_approve = null, test_result = null\r\n"
+					+ "WHERE member_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, selectLevel);
+            pstmt.setInt(2, selectDuration);
+            pstmt.setInt(3, selectDuration);
+            pstmt.setString(4, MemberService.memberInfo.getMemberId());
+            
+            result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
 	
-//	public int insertCourse(Member member, int selectLevel, int selectDuration) {
-//		int result = 0;
-//		try {
-//			conn();
-////			String sql = "INSERT INTO courseinfo (member_id, level_id, start_date, end_date) VALUES (?, ?, SYSDATE, ?)";
-//			String sql = "INSERT INTO courseinfo VALUES (?, ?, ?, sysdate, ?, null, null)";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, MemberService.memberInfo.getMemberId());
-//            pstmt.setInt(2, selectLevel);
-//            pstmt.setString(3, me);
-//            
-//            Calendar endDate = Calendar.getInstance();
-//            endDate.add(Calendar.MONTH, selectDuration);
-//            
-//            
-//            pstmt.setDate(4, new Date(endDate.getInstance().getTimeInMillis()));
-//            
-//            result = pstmt.executeUpdate();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconn();
-//		}
-//		return result;
-//	}
+	//레벨 테스트 신청
+	public int testApply (String id) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE courseinfo SET test_apply = ? WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "O");
+			pstmt.setString(2, MemberService.memberInfo.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	
+}

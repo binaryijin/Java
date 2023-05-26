@@ -30,7 +30,8 @@ public class ManagerService {
 			System.out.println("등록일 : " + list.get(i).getStartDate());
 			System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 			System.out.println("종료일 : " + list.get(i).getEndDate());
-			System.out.println("레벨 테스트 신청 대상 : " + list.get(i).getTestTarget());
+			System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
+			System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
 			System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
 		}
 	}
@@ -61,7 +62,8 @@ public class ManagerService {
 				System.out.println("등록일 : " + list.get(i).getStartDate());
 				System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 				System.out.println("종료일 : " + list.get(i).getEndDate());
-				System.out.println("레벨 테스트 신청 대상 : " + list.get(i).getTestTarget());
+				System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
+				System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
 				System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
 			}
 		}else {
@@ -69,8 +71,26 @@ public class ManagerService {
 		}
 	}
 	
+	//테스트 신청자 조회 후 승인
+	public void getTestApply() {
+		List<Member> list = ManagerDAO.getInstance().checkApplyList();
+		System.out.println("[ 테스트 신청자 조회 ]");
+		if(list.size() > 0) {
+			System.out.println("==============================================================");
+			for(int i=0; i<list.size(); i++) {
+				System.out.println("ID : " + list.get(i).getMemberId() + ", 수강 레벨 : " + list.get(i).getLevelId() + ", 등록 기간 : " + list.get(i).getDuration() + "개월, 종료일 : " + list.get(i).getEndDate());
+				System.out.println("--------------------------------------------------------------");
+				// 승인 하기
+
+			}
+		}else {
+			System.out.println("레벨 테스트 신청자가 없습니다.");
+		}
+	}
+	
+	
 	//회원 삭제
-	//부모 테이블(member) 삭제 시, 자식 테이블도 같이 삭제됨(ON DELETE CASCADE)
+	//부모 테이블(member) 삭제 시, 자식 테이블도 같이 삭제됨(해당 컬럼 -> ON DELETE CASCADE)
 	public void deleteMember() {
 		System.out.println("[ 수강생 삭제 ]");
 		System.out.println("ID를 입력하세요. >");

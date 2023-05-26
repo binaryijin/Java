@@ -21,6 +21,7 @@ public class Application {
 				System.out.println("============================");
 				System.out.println("1. 로그인 | 2. 회원가입 | 3. 종료");
 				System.out.println("============================");
+				System.out.println("🌷 🌷 🌷 🌷 🌷 🌷 🌷 🌷 🌷 🌷 🌷");
 				System.out.println("입력 > ");
 				selectNo = Integer.parseInt(sc.nextLine());
 
