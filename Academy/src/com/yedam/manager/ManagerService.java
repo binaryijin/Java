@@ -79,14 +79,33 @@ public class ManagerService {
 		if(list.size() > 0) {
 			System.out.println("==============================================================");
 			for(int i=0; i<list.size(); i++) {
+				
 				System.out.println("ID : " + list.get(i).getMemberId() + ", 수강 레벨 : " + list.get(i).getLevelId() + ", 등록 기간 : " + list.get(i).getDuration() + "개월, 종료일 : " + list.get(i).getEndDate());
 				System.out.println("--------------------------------------------------------------");
 				// 승인 하기
-				
+				System.out.println("테스트 신청을 승인 하시겠습니까?");
+				System.out.println("1. 승인 | 2. 취소");
+				int selectNo = Integer.parseInt(sc.nextLine());
+				switch (selectNo) {
+                case 1:
+                    int result = ManagerDAO.getInstance().testApprove(list.get(i));
+                    if (result > 0) {
+                        System.out.println(list.get(i).getMemberId() + "님의 레벨 테스트 신청이 승인되었습니다.");
+                    } else {
+                        System.out.println(list.get(i).getMemberId() + "님의 레벨 테스트 신청 승인에 실패했습니다.");
+                    }
+                    break;
+                case 2:
+                    System.out.println("뒤로 가기");
+                    return; // 메소드 종료
+                default:
+                    System.out.println("잘못된 선택입니다. 다시 입력해주세요.");
+                    break;
+            }
 			}
-		}else {
-			System.out.println("레벨 테스트 신청자가 없습니다.");
-		}
+		} else {
+            System.out.println("레벨 테스트 신청자가 없습니다.");
+        }
 	}
 	
 	

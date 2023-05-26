@@ -127,8 +127,8 @@ public class ManagerDAO extends DAO{
 			conn();
 			String sql = "UPDATE courseinfo SET test_approve = ? WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "신청 완료");
-			pstmt.setString(2, MemberService.memberInfo.getMemberId());
+			pstmt.setString(1, "승인 완료");
+			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

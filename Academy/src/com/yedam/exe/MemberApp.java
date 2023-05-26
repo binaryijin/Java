@@ -58,6 +58,9 @@ public class MemberApp {
 				MemberService.memberInfo = null;
 				System.out.println("로그아웃 되었습니다.");
 				break;
+			default:
+				System.out.println("잘못 입력하셨습니다.");
+				break;
 			}
 		}
 		
