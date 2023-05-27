@@ -9,11 +9,11 @@ public class Application {
 	int selectNo = 0;
 	Scanner sc = new Scanner(System.in);
 	MemberService ms = new MemberService();
-	
+
 	public Application(){
 		run();
 	}
-	
+
 	private void run() {
 		while(selectNo !=3 ) {
 			if(MemberService.memberInfo == null) {
@@ -44,30 +44,5 @@ public class Application {
 				}
 			}
 		}
-
-
-
-//			menu();
-//			switch (selectNo) {
-//			case 1:
-//				new MemberApp();
-//				break;
-//			case 2:
-//				break;
-//			case 3:
-//				System.out.println("end of program");
-//				break;
-//	
-//			}
-//		}
 	}
-	
-//	private void menu() {
-//		System.out.println("========================");
-//		System.out.println("1. 학생 | 2. 학원 | 3. 종료");
-//		System.out.println("========================");
-//		System.out.println("입력 > ");
-//		selectNo = Integer.parseInt(sc.nextLine());
-//	}
-	
 }

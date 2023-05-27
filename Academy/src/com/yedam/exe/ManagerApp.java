@@ -8,7 +8,7 @@ import com.yedam.member.MemberService;
 public class ManagerApp {
 	Scanner sc = new Scanner(System.in);
 	ManagerService mngs = new ManagerService();
-	
+
 	public ManagerApp() {
 		ManagerRun();
 	}
@@ -19,7 +19,7 @@ public class ManagerApp {
 		while(run) {
 			ManagerMenu();
 			int selectNo = Integer.parseInt(sc.nextLine());
-			
+
 			switch (selectNo) {
 			case 1:
 				System.out.println("==================================================");
@@ -62,7 +62,7 @@ public class ManagerApp {
 			}
 		}
 	}
-	
+
 	private void ManagerMenu() {
 		System.out.println("=======================================================");
 		System.out.println("관리자 모드");

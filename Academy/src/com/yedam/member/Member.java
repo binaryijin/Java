@@ -3,24 +3,12 @@ package com.yedam.member;
 import java.sql.Date;
 
 public class Member {
-//	create table member(
-//			member_id varchar2(10) primary key,
-//			member_pw varchar2(10),
-//			member_name varchar2(10),
-//			member_auth char(1));
 	
 	private String memberId;
 	private String memberPw;
 	private String memberName;
 	private String memberAuth;
 	
-//	member_id varchar2(20) primary Key,
-//	lavel_id number(1),
-//	start_date date,
-//	duration number(1),
-//	test_target varchar2(20),
-//	test_result varchar2(20),
-
 	
 	private int levelId;
 	private String levelName;

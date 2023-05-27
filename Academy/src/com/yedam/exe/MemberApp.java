@@ -7,18 +7,18 @@ import com.yedam.member.MemberService;
 public class MemberApp {
 	Scanner sc = new Scanner(System.in);
 	MemberService ms = new MemberService();
-	
+
 	public MemberApp() {
 		MemberRun();
 	}
-	
+
 	private void MemberRun() {
 		boolean run = true;
-		
+
 		while(run) {
 			Membermenu();
 			int selectNo = Integer.parseInt(sc.nextLine());
-			
+
 			switch (selectNo) {
 			case 1:
 				System.out.println("===================================");
@@ -63,9 +63,8 @@ public class MemberApp {
 				break;
 			}
 		}
-		
 	}
-	
+
 	private void Membermenu() {
 		System.out.println("========================================================");
 		System.out.println("1. 내 정보 조회 | 2. 수강 및 테스트 신청 | 3. 비밀번호 수정 | 4. 종료");

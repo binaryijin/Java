@@ -4,9 +4,9 @@ import com.yedam.common.DAO;
 
 public class MemberDAO extends DAO {
 	private static MemberDAO memDao = null;
-	
+
 	private MemberDAO(){
-		
+
 	}
 	public static MemberDAO getInstance() {
 		if(memDao == null) {
@@ -14,9 +14,8 @@ public class MemberDAO extends DAO {
 		}
 		return memDao;
 	}
-	
+
 	//로그인
-	
 	public Member login (String id) {
 		Member member = null;
 		try {
@@ -39,7 +38,7 @@ public class MemberDAO extends DAO {
 		}
 		return member;
 	}
-	
+
 	//회원 가입 - 기본 정보
 	public int insertMember(Member member) {
 		int result = 0;
@@ -58,7 +57,7 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
-	
+
 	//내 정보 조회 - 수강 정보 조회
 	public Member getCourseInfo (String id) {
 		Member member = null;
@@ -87,6 +86,7 @@ public class MemberDAO extends DAO {
 		}
 		return member;
 	}
+	
 	//비밀번호 수정
 	public int updatePw(Member member) {
 		int result = 0;
@@ -96,9 +96,9 @@ public class MemberDAO extends DAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberPw());
 			pstmt.setString(2, member.getMemberId());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -106,33 +106,7 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
-	
 
-	//수강 등록 유무 확인 1@@@!!!!!!@@@@@@@@@!!!!!!없어도?
-	public Member checkCourse(String id) {
-		Member member = null;
-		try {
-			conn();
-			String sql = "SELECT * FROM courseinfo WHERE member_id = ? ";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, MemberService.memberInfo.getMemberId());
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				member = new Member();
-				member.setMemberId(id);
-				member.setLevelId(rs.getInt("level_id"));
-				member.setStartDate(rs.getDate("start_date"));
-				member.setDuration(rs.getInt("duration"));
-				member.setEndDate(rs.getString("end_date"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			disconn();
-		}
-		return member;
-	}
-	
 	//수강 신청
 	public int insertCourse( int selectLevel, int selectDuration) {
 		int result = 0;
@@ -159,48 +133,48 @@ public class MemberDAO extends DAO {
 		return result;
 	}
 	private String getLevelName(int selectLevel) {
-	    String levelName = "";
-	    switch (selectLevel) {
-	        case 1:
-	            levelName = "Beginner";
-	            break;
-	        case 2:
-	            levelName = "Basic";
-	            break;
-	        case 3:
-	            levelName = "Intermediate";
-	            break;
-	        case 4:
-	            levelName = "Advanced";
-	            break;
-	        default:
-	            break;
-	    }
-	    return levelName;
+		String levelName = "";
+		switch (selectLevel) {
+		case 1:
+			levelName = "Beginner";
+			break;
+		case 2:
+			levelName = "Basic";
+			break;
+		case 3:
+			levelName = "Intermediate";
+			break;
+		case 4:
+			levelName = "Advanced";
+			break;
+		default:
+			break;
+		}
+		return levelName;
 	}
-	
+
 	//재 수강 신청
 	public int updateCourse( int selectLevel, int selectDuration) {
 		int result = 0;
 		try {
 			conn();
-			
+
 			String levelName = getLevelName(selectLevel);
-			
+
 			String sql = "UPDATE courseinfo "
 					+ "SET level_id = ?, level_name = ?, start_date = sysdate, duration = ?, end_date = to_char(add_months(sysdate, ?),'YYYY-MM-DD'),"
 					+ "test_apply = null, test_approve = null, test_result = null\r\n"
 					+ "WHERE member_id = ?";
-			
+
 			pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, selectLevel);
-            pstmt.setString(2, levelName);
-            pstmt.setInt(3, selectDuration);
-            pstmt.setInt(4, selectDuration);
-            pstmt.setString(5, MemberService.memberInfo.getMemberId());
-            
-            result = pstmt.executeUpdate();
-			
+			pstmt.setInt(1, selectLevel);
+			pstmt.setString(2, levelName);
+			pstmt.setInt(3, selectDuration);
+			pstmt.setInt(4, selectDuration);
+			pstmt.setString(5, MemberService.memberInfo.getMemberId());
+
+			result = pstmt.executeUpdate();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -208,7 +182,7 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
-	
+
 	//레벨 테스트 신청
 	public int testApply (String id) {
 		int result = 0;
@@ -226,6 +200,6 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
-	
-	
+
+
 }

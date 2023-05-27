@@ -18,6 +18,7 @@ public class ManagerDAO extends DAO{
 		}
 		return mngDao;
 	}
+	
 	//전체 수강생 조회
 	public List<Member> getMemberList(){
 		List<Member> list = new ArrayList<>();
@@ -53,7 +54,7 @@ public class ManagerDAO extends DAO{
 		}
 		return list;
 	}
-	
+
 	//강의별 수강생 조회
 	public List<Member> getcourseList(int courseMenu){
 		List<Member> list = new ArrayList<>();
@@ -67,7 +68,7 @@ public class ManagerDAO extends DAO{
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, courseMenu);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				member = new Member();
 				member.setLevelId(rs.getInt("level_id"));
@@ -90,7 +91,7 @@ public class ManagerDAO extends DAO{
 		}
 		return list;
 	}
-	
+
 	//테스트 신청 확인
 	public List<Member> checkApplyList(){
 		List<Member> list = new ArrayList<>();
@@ -100,7 +101,7 @@ public class ManagerDAO extends DAO{
 			String sql = "SELECT * FROM courseinfo WHERE test_apply = '신청 대기' ";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				member = new Member();
 				member.setMemberId(rs.getString("member_id"));
@@ -111,7 +112,7 @@ public class ManagerDAO extends DAO{
 				member.setTestApply(rs.getString("test_apply"));
 				member.setTestApprove(rs.getString("test_approve"));
 				member.setTestResult(rs.getString("test_result"));
-				
+
 				list.add(member);
 			}
 		} catch (Exception e) {
@@ -121,7 +122,7 @@ public class ManagerDAO extends DAO{
 		}
 		return list;
 	}
-	
+
 	//레벨 테스트 신청 승인
 	public int testApprove(Member member) {
 		int result = 0;
@@ -133,12 +134,12 @@ public class ManagerDAO extends DAO{
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 
-//			if (result > 0) {
-//				sql = "UPDATE courseinfo SET test_apply = null WHERE member_id = ?";
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, member.getMemberId());
-//				pstmt.executeUpdate();
-//			}
+			//			if (result > 0) {
+			//				sql = "UPDATE courseinfo SET test_apply = null WHERE member_id = ?";
+			//				pstmt = conn.prepareStatement(sql);
+			//				pstmt.setString(1, member.getMemberId());
+			//				pstmt.executeUpdate();
+			//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -146,11 +147,6 @@ public class ManagerDAO extends DAO{
 		}
 		return result;
 	}
-	
-	
-	
-	
-	
 
 	//회원 삭제
 	public int deleteMember(String id) {
@@ -169,4 +165,5 @@ public class ManagerDAO extends DAO{
 		}
 		return result;
 	}
+	
 }
