@@ -18,16 +18,7 @@ public class ManagerService {
 			System.out.println("=========================");
 			System.out.println("ID : " + list.get(i).getMemberId());
 			System.out.println("이름 : " + list.get(i).getMemberName());
-			
-			if(list.get(i).getLevelId() == 1) {
-				System.out.println("수강 레벨 : Beginner");
-			}else if(list.get(i).getLevelId() == 2) {
-				System.out.println("수강 레벨 : Basic");
-			}else if(list.get(i).getLevelId() == 3) {
-				System.out.println("수강 레벨 : Intermediate");
-			}else if(list.get(i).getLevelId() == 4) {
-				System.out.println("수강 레벨 : Advanced");
-			}
+			System.out.println("수강 레벨 : " + list.get(i).getLevelName());
 			System.out.println("등록일 : " + list.get(i).getStartDate());
 			System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 			System.out.println("종료일 : " + list.get(i).getEndDate());
@@ -45,19 +36,29 @@ public class ManagerService {
 		
 		int courseMenu = Integer.parseInt(sc.nextLine());
 		List<Member> list = ManagerDAO.getInstance().getcourseList(courseMenu);
+		
+		switch (courseMenu) {
+		case 1:
+			System.out.println("Beginner 레벨의 수강생 목록입니다.");
+			break;
+		case 2:
+			System.out.println("Basic 레벨의 수강생 목록입니다.");
+			break;
+		case 3:
+			System.out.println("Intermediate 레벨의 수강생 목록입니다.");
+			break;
+		case 4:
+			System.out.println("Advanced 레벨의 수강생 목록입니다.");
+			break;
+		default:
+			System.out.println("잘못 입력하셨습니다.");
+			break;
+		}
+		
 		if(list.size() > 0) {
 			for(int i=0; i<list.size(); i++) {
 				System.out.println("=========================");
-
-				if(list.get(i).getLevelId() == 1) {
-					System.out.println("수강 레벨 : Beginner");
-				}else if(list.get(i).getLevelId() == 2) {
-					System.out.println("수강 레벨 : Basic");
-				}else if(list.get(i).getLevelId() == 3) {
-					System.out.println("수강 레벨 : Intermediate");
-				}else if(list.get(i).getLevelId() == 4) {
-					System.out.println("수강 레벨 : Advanced");
-				}
+				System.out.println("수강 레벨 : " + list.get(i).getLevelName());
 				System.out.println("ID : " + list.get(i).getMemberId());
 				System.out.println("이름 : " + list.get(i).getMemberName());
 				System.out.println("등록일 : " + list.get(i).getStartDate());
@@ -87,10 +88,11 @@ public class ManagerService {
 				applicant = true;
 
 				System.out.println("==============================================================");
-				System.out.println("ID : " + list.get(i).getMemberId() + ", 수강 레벨 : " + list.get(i).getLevelId() + ", 등록 기간 : " + list.get(i).getDuration() + "개월, 종료일 : " + list.get(i).getEndDate());
+				System.out.println("ID : " + list.get(i).getMemberId() + ", 수강 레벨 : " + list.get(i).getLevelName() + 
+									", 등록 기간 : " + list.get(i).getDuration() + "개월, 종료일 : " + list.get(i).getEndDate());
 				System.out.println("--------------------------------------------------------------");
 				// 승인 하기
-				System.out.println("테스트 신청을 승인 하시겠습니까?");
+				System.out.println("테스트 신청을 승인하시겠습니까?");
 				System.out.println("1. 승인 | 2. 취소");
 				int selectNo = Integer.parseInt(sc.nextLine());
 				switch (selectNo) {
@@ -99,7 +101,7 @@ public class ManagerService {
 					if (result > 0) {
 						System.out.println(list.get(i).getMemberId() + "님의 레벨 테스트 신청이 승인되었습니다.");
 					} else {
-						System.out.println(list.get(i).getMemberId() + "님의 레벨 테스트 신청 승인에 실패했습니다.");
+						System.out.println(list.get(i).getMemberId() + "님의 레벨 테스트 신청이 승인 실패했습니다.");
 					}
 					break;
 				case 2:

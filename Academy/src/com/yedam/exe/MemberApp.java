@@ -35,9 +35,6 @@ public class MemberApp {
 				}
 				break;
 			case 2:
-				ms.updatePw();
-				break;
-			case 3:
 				System.out.println("=========================================================");
 				System.out.println("1. 수강 신청 | 2. 레벨 테스트 신청 | 3. 레벨 테스트 결과 | 4. 뒤로 가기");
 				System.out.println("=========================================================");
@@ -52,6 +49,9 @@ public class MemberApp {
 				}else if(menu.equals("4")) {
 					break;
 				}
+				break;
+			case 3:
+				ms.updatePw();
 				break;
 			case 4:
 				run = false;
@@ -68,7 +68,7 @@ public class MemberApp {
 	
 	private void Membermenu() {
 		System.out.println("========================================================");
-		System.out.println("1. 내 정보 조회 | 2. 비밀번호 수정 | 3. 수강 및 테스트 신청 | 4. 종료");
+		System.out.println("1. 내 정보 조회 | 2. 수강 및 테스트 신청 | 3. 비밀번호 수정 | 4. 종료");
 		System.out.println("========================================================");
 		System.out.println("입력 > ");
 	}

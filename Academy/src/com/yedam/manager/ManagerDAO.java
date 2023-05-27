@@ -24,7 +24,7 @@ public class ManagerDAO extends DAO{
 		Member member = null;
 		try {
 			conn();
-			String sql = "SELECT m.member_id, m.member_name, c.level_id, c.start_date, c.duration, c.end_date, c.test_apply, c.test_approve, c.test_result\r\n"
+			String sql = "SELECT m.member_id, m.member_name, c.level_id, c.level_name, c.start_date, c.duration, c.end_date, c.test_apply, c.test_approve, c.test_result\r\n"
 					+ "FROM member m join courseinfo c\r\n"
 					+ "ON m.member_id = c.member_id ORDER BY m.member_id";
 
@@ -36,6 +36,7 @@ public class ManagerDAO extends DAO{
 				member.setMemberId(rs.getString("member_id"));
 				member.setMemberName(rs.getString("member_name"));
 				member.setLevelId(rs.getInt("level_id"));
+				member.setLevelName(rs.getString("level_name"));
 				member.setStartDate(rs.getDate("start_date"));
 				member.setDuration(rs.getInt("duration"));
 				member.setEndDate(rs.getString("end_date"));
@@ -59,7 +60,7 @@ public class ManagerDAO extends DAO{
 		Member member = null;
 		try {
 			conn();
-			String sql = "SELECT c.level_id, m.member_id, m.member_name, c.start_date, c.duration, c.end_date, c.test_apply, c.test_approve, c.test_result\r\n"
+			String sql = "SELECT c.level_id, c.level_name, m.member_id, m.member_name, c.start_date, c.duration, c.end_date, c.test_apply, c.test_approve, c.test_result\r\n"
 					+ "FROM member m join courseinfo c\r\n"
 					+ "ON m.member_id = c.member_id\r\n"
 					+ "WHERE c.level_id = ? ";
@@ -70,6 +71,7 @@ public class ManagerDAO extends DAO{
 			while(rs.next()) {
 				member = new Member();
 				member.setLevelId(rs.getInt("level_id"));
+				member.setLevelName(rs.getString("level_name"));
 				member.setMemberId(rs.getString("member_id"));
 				member.setMemberName(rs.getString("member_name"));
 				member.setStartDate(rs.getDate("start_date"));
@@ -103,6 +105,7 @@ public class ManagerDAO extends DAO{
 				member = new Member();
 				member.setMemberId(rs.getString("member_id"));
 				member.setLevelId(rs.getInt("level_id"));
+				member.setLevelName(rs.getString("level_name"));
 				member.setDuration(rs.getInt("duration"));
 				member.setEndDate(rs.getString("end_date"));
 				member.setTestApply(rs.getString("test_apply"));

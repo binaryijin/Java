@@ -23,6 +23,7 @@ public class Member {
 
 	
 	private int levelId;
+	private String levelName;
 	private Date startDate;
 	private int duration;
 	private String testApply;
@@ -35,6 +36,12 @@ public class Member {
 	private String testApprove;
 	
 	
+	public String getLevelName() {
+		return levelName;
+	}
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
 	public String getTestApprove() {
 		return testApprove;
 	}

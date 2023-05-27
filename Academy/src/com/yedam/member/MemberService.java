@@ -61,7 +61,7 @@ public class MemberService {
 		int result = MemberDAO.getInstance().insertMember(member);
 		
 		if(result > 0) {
-			System.out.println("회원 가입 되었습니다.");
+			System.out.println("회원 가입되었습니다.");
 		}else {
 			System.out.println("회원 가입 실패");
 		}
@@ -80,23 +80,12 @@ public class MemberService {
 	public void getCourseInfo() {
 		System.out.println("[ 수강 정보 조회 ]");
 		
-//		Member member = MemberDAO.getInstance().checkCourse(memberInfo.getMemberId());
-//		if(MemberDAO.getInstance().checkCourse(memberInfo.getMemberId()) != null )
-
 		Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
 		if(member == null) {
 			System.out.println("수강 정보가 없습니다. 수강 신청하세요.");
 		}else {
 			System.out.println("ID : " + member.getMemberId());
-			if(member.getLevelId() == 1) {
-				System.out.println("수강레벨 : Beginner");
-			}else if(member.getLevelId() == 2) {
-				System.out.println("수강레벨 : Basic");
-			}else if(member.getLevelId() == 3) {
-				System.out.println("수강레벨 : Intermediate");
-			}else if(member.getLevelId() == 4) {
-				System.out.println("수강레벨 : Advanced");
-			}
+			System.out.println("수강 레벨 : " + member.getLevelName());
 			System.out.println("등록일 : " + member.getStartDate());
 			System.out.println("등록 기간 : " + member.getDuration() + "개월");
 			System.out.println("종료일 : " + member.getEndDate());
@@ -159,18 +148,7 @@ public class MemberService {
 			}else {
 				//수강 진행 중
 				System.out.println("현재 수강 중 입니다.");
-
-				//1. Beginner | 2. Basic | 3. Intermediate | 4. Advanced
-				if(member.getLevelId() == 1) {
-					System.out.print("▷ Beginner");
-				}else if (member.getLevelId() == 2){
-					System.out.print("▷ Basic");
-				}else if (member.getLevelId() == 3){
-					System.out.print("▷ Intermediate");
-				}else if (member.getLevelId() == 4){
-					System.out.print("▷ Advanced");
-				}
-				System.out.println(" 레벨, " + member.getDuration() + "개월 과정");
+				System.out.println(member.getLevelName() + " 레벨, " + member.getDuration() + "개월 과정");
 			}
 		}else {
 			//수강 내역 없음 - 신청 가능
@@ -180,34 +158,25 @@ public class MemberService {
 
 	//수강신청 - insert
 	public void insertCourse(){
-			System.out.println("[ 수 강 신 청 ]");
-			System.out.println("▽ 수강 레벨을 선택하세요.");
-			System.out.println("1. Beginner | 2. Basic | 3. Intermediate | 4. Advanced");
-			int selectLevel = Integer.parseInt(sc.nextLine());
+		System.out.println("[ 수 강 신 청 ]");
+		System.out.println("▽ 수강 레벨을 선택하세요.");
+		System.out.println("1. Beginner | 2. Basic | 3. Intermediate | 4. Advanced");
+		int selectLevel = Integer.parseInt(sc.nextLine());
 
-			System.out.println("▽ 수강 기간을 선택하세요.");
-			System.out.println("1. 1개월 | 2. 2개월 | 3. 3개월");
-			int selectDuration = Integer.parseInt(sc.nextLine());
+		System.out.println("▽ 수강 기간을 선택하세요.");
+		System.out.println("1. 1개월 | 2. 2개월");
+		int selectDuration = Integer.parseInt(sc.nextLine());
 
-			int result = MemberDAO.getInstance().insertCourse(selectLevel, selectDuration);
+		int result = MemberDAO.getInstance().insertCourse(selectLevel, selectDuration);
 
-			if (result > 0) {
-				if(selectLevel == 1) {
-					System.out.print("▷ Beginner");
-				}else if (selectLevel == 2){
-					System.out.print("▷ Basic");
-				}else if (selectLevel == 3){
-					System.out.print("▷ Intermediate");
-				}else if (selectLevel == 4){
-					System.out.print("▷ Advanced");
-				}
-				System.out.println(" 레벨, " + selectDuration + "개월 과정이 신청되었습니다.");
-				Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
-				System.out.println("수강 종료일은 " + member.getEndDate() + "일 입니다.");
-			} else {
-				System.out.println("수강 신청 실패");
-			}
+		if (result > 0) {
+			Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
+			System.out.println( member.getLevelName() + " 레벨, " + selectDuration + "개월 과정이 신청되었습니다.");
+			System.out.println("수강 종료일은 " + member.getEndDate() + "일 입니다.");
+		} else {
+			System.out.println("수강 신청 실패");
 		}
+	}
 	
 	//새 수강 신청 update
 	public void updateCourse() {
@@ -217,23 +186,14 @@ public class MemberService {
 		int selectLevel = Integer.parseInt(sc.nextLine());
 
 		System.out.println("▽ 수강 기간을 선택하세요.");
-		System.out.println("1. 1개월 | 2. 2개월 | 3. 3개월");
+		System.out.println("1. 1개월 | 2. 2개월");
 		int selectDuration = Integer.parseInt(sc.nextLine());
 
 		int result = MemberDAO.getInstance().updateCourse(selectLevel, selectDuration);
 
 		if (result > 0) {
-			if(selectLevel == 1) {
-				System.out.print("▷ Beginner");
-			}else if (selectLevel == 2){
-				System.out.print("▷ Basic");
-			}else if (selectLevel == 3){
-				System.out.print("▷ Intermediate");
-			}else if (selectLevel == 4){
-				System.out.print("▷ Advanced");
-			}
-			System.out.println(" 레벨, " + selectDuration + "개월 과정이 신청되었습니다.");
 			Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
+			System.out.println( member.getLevelName() + " 레벨, " + selectDuration + "개월 과정이 신청되었습니다.");
 			System.out.println("수강 종료일은 " + member.getEndDate() + "일 입니다.");
 		} else {
 			System.out.println("수강 신청 실패");
@@ -244,6 +204,10 @@ public class MemberService {
 	//수강 1개월 - 한달 더 수강해야 @!@!!@!@@@@!!!!@@@!!!@@@@!@!!@@!@ 미완성
 	public void testApply() {
 		Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
+		if (member == null) {
+	        System.out.println("수강 정보가 없습니다. 수강 신청하세요.");
+	        return;
+	    }
 		if(member.getTestApply() != null) {
 			System.out.println("이미 신청 되었습니다. 관리자 승인을 기다려주세요.");
 		}else {
@@ -258,7 +222,7 @@ public class MemberService {
 				e.printStackTrace();
 			}
 			int compare = now.compareTo(endCheck2);
-			if((compare > 0) && (member.getDuration() >=2)) {
+			if((compare > 0) && (member.getDuration() ==2)) {
 				//종료일 지남 - 테스트 신청 가능
 				System.out.println("레벨 테스트 신청 가능합니다.");
 				System.out.println("신청하시겠습니까?");
@@ -272,8 +236,13 @@ public class MemberService {
 						System.out.println("레벨 테스트 신청 신청 실패");
 					}
 				}else if(selectNo == 2) {
-					// //////////////////////////////////////////////////
 				}
+			}else if((compare < 0) && (member.getDuration() ==2)){
+				System.out.println("수강 코스 당 2개월 수강 후 신청 가능합니다. 종료일을 확인하세요.");
+				System.out.println("현재 " + member.getDuration() + "개월  과정 수강 중, 종료일 : " + member.getEndDate());
+			}else if(compare < 0 && (member.getDuration() ==1)) {
+				System.out.println("수강 코스 당 2개월 수강 후 신청 가능합니다. \n(1개월 추가 등록 필요)");
+				System.out.println("현재 " + member.getDuration() + "개월  과정 수강 중, 종료일 : " + member.getEndDate());
 			}
 		}
 	}
