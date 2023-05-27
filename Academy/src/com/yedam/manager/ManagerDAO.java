@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.yedam.common.DAO;
 import com.yedam.member.Member;
-import com.yedam.member.MemberService;
 
 public class ManagerDAO extends DAO{
 	private static ManagerDAO mngDao = null;
@@ -120,7 +119,7 @@ public class ManagerDAO extends DAO{
 		return list;
 	}
 	
-	//레벨 테스트 신청 승인 !@!@@@@@@!!!!!!@@@@@@@@!!!!!!!!!!!
+	//레벨 테스트 신청 승인
 	public int testApprove(Member member) {
 		int result = 0;
 		try {
@@ -130,6 +129,13 @@ public class ManagerDAO extends DAO{
 			pstmt.setString(1, "승인 완료");
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
+
+//			if (result > 0) {
+//				sql = "UPDATE courseinfo SET test_apply = null WHERE member_id = ?";
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, member.getMemberId());
+//				pstmt.executeUpdate();
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -84,10 +84,9 @@ public class MemberService {
 //		if(MemberDAO.getInstance().checkCourse(memberInfo.getMemberId()) != null )
 
 		Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
-		if(MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId()) == null) {
+		if(member == null) {
 			System.out.println("수강 정보가 없습니다. 수강 신청하세요.");
 		}else {
-			member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
 			System.out.println("ID : " + member.getMemberId());
 			if(member.getLevelId() == 1) {
 				System.out.println("수강레벨 : Beginner");
