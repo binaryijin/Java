@@ -84,7 +84,7 @@ public class ManagerService {
 				if ("승인 완료".equals(list.get(i).getTestApprove())) {
 					continue;
 				}
-
+				//신청자 한명 씩 확인하고 승인하기
 				applicant = true;
 
 				System.out.println("==============================================================");

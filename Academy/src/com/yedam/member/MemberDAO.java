@@ -174,6 +174,14 @@ public class MemberDAO extends DAO {
 			pstmt.setString(5, MemberService.memberInfo.getMemberId());
 
 			result = pstmt.executeUpdate();
+			
+			//재 수강 신청시 테스트 결과 - null변경
+			if (result > 0) {
+				sql = "UPDATE courseinfo SET test_result = null WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, MemberService.memberInfo.getMemberId());
+				pstmt.executeUpdate();
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -191,7 +199,7 @@ public class MemberDAO extends DAO {
 			String sql = "UPDATE courseinfo SET test_apply = ? WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "신청 대기");
-			pstmt.setString(2, MemberService.memberInfo.getMemberId());
+			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,6 +208,31 @@ public class MemberDAO extends DAO {
 		}
 		return result;
 	}
-
+	
+	//레벨 테스트 결과
+	public int testResult(String id) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE courseinfo SET test_result = ? WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "합격");
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+			
+			//합격시 신청,승인 null 변경
+			if (result > 0) {
+				sql = "UPDATE courseinfo SET test_apply = null, test_approve = null WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
 
 }

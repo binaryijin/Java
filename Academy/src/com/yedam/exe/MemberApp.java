@@ -35,9 +35,9 @@ public class MemberApp {
 				}
 				break;
 			case 2:
-				System.out.println("=========================================================");
-				System.out.println("1. 수강 신청 | 2. 레벨 테스트 신청 | 3. 레벨 테스트 결과 | 4. 뒤로 가기");
-				System.out.println("=========================================================");
+				System.out.println("=====================================");
+				System.out.println("1. 수강 신청 | 2. 레벨 테스트 신청 | 3. 뒤로 가기");
+				System.out.println("=====================================");
 				System.out.println("입력 >");
 				menu = sc.nextLine();
 				if(menu.equals("1")) {
@@ -45,8 +45,6 @@ public class MemberApp {
 				}else if(menu.equals("2")) {
 					ms.testApply();
 				}else if(menu.equals("3")) {
-
-				}else if(menu.equals("4")) {
 					break;
 				}
 				break;
