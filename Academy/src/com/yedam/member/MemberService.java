@@ -333,7 +333,7 @@ public class MemberService {
 	        answer1 = 2;
 
 	        question2 = "문제 2: What's your favorite movie genre?\r\n" + 
-	        		"1. I don't watch movies.\r\n" + 
+	        		"1. I'm a big fan of classical music.\r\n" + 
 	        		"2. I enjoy gardening in my free time.\r\n" + 
 	        		"3. I'm more into action movies.";
 	        answer2 = 3;
@@ -351,10 +351,10 @@ public class MemberService {
 	        answer1 = 1;
 
 	        question2 = "문제 2: How do you handle difficult situations at work?\r\n" + 
-	        		"1. I like to take frequent breaks and relax.\r\n" + 
-	        		"2. I'm not really interested in my work.\r\n" + 
-	        		"3. I seek guidance from my colleagues and superiors.";
-	        answer2 = 3;
+	        		"1. I don't really have a specific way to relax.\r\n" + 
+	        		"2. I seek guidance from my colleagues and superiors.\r\n" + 
+	        		"3. I'm not really interested in my work.";
+	        answer2 = 2;
 
 	        question3 = "문제 3: How do you stay motivated to achieve your goals?\r\n" + 
 	        		"1. I don't really set specific goals for myself.\r\n" + 
