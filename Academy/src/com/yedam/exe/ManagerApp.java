@@ -36,17 +36,7 @@ public class ManagerApp {
 				}
 				break;
 			case 2:
-				System.out.println("==================================================");
-				System.out.println("1. 레벨 테스트 승인 | 2. 레벨 테스트 결과 입력 | 3. 뒤로 가기");
-				System.out.println("==================================================");
-				System.out.println("입력 >");
-				menu = sc.nextLine();
-				if(menu.equals("1")) {
-					mngs.getTestApply();
-				}else if(menu.equals("2")) {
-				}else if(menu.equals("3")) {
-					break;
-				}
+				mngs.getTestApply();
 				break;
 			case 3:
 				mngs.deleteMember();
@@ -67,7 +57,7 @@ public class ManagerApp {
 		System.out.println("=======================================================");
 		System.out.println("관리자 모드");
 		System.out.println("-------------------------------------------------------");
-		System.out.println("1. 수강생 정보 조회 | 2. 레벨 테스트 관리  | 3. 수강생 삭제 | 4. 종료");
+		System.out.println("1. 수강생 정보 조회 | 2. 레벨 테스트 신청 승인  | 3. 수강생 삭제 | 4. 종료");
 		System.out.println("=======================================================");
 		System.out.println("입력 > ");
 	}
