@@ -134,12 +134,6 @@ public class ManagerDAO extends DAO{
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 
-			//			if (result > 0) {
-			//				sql = "UPDATE courseinfo SET test_apply = null WHERE member_id = ?";
-			//				pstmt = conn.prepareStatement(sql);
-			//				pstmt.setString(1, member.getMemberId());
-			//				pstmt.executeUpdate();
-			//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
