@@ -175,7 +175,7 @@ public class MemberDAO extends DAO {
 
 			result = pstmt.executeUpdate();
 			
-			//재 수강 신청시 테스트 결과 - null변경
+			//재 수강 신청시 테스트 결과 - null로 변경
 			if (result > 0) {
 				sql = "UPDATE courseinfo SET test_result = null WHERE member_id = ?";
 				pstmt = conn.prepareStatement(sql);
@@ -220,7 +220,7 @@ public class MemberDAO extends DAO {
 			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
 			
-			//합격시 신청,승인 null 변경
+			//합격시 신청,승인 null로 변경
 			if (result > 0) {
 				sql = "UPDATE courseinfo SET test_apply = null, test_approve = null WHERE member_id = ?";
 				pstmt = conn.prepareStatement(sql);

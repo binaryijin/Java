@@ -17,8 +17,6 @@ public class Member {
 	private String testApply;
 	private String testResult;
 	
-	
-	
 	private String endDate;
 	
 	private String testApprove;
@@ -42,8 +40,6 @@ public class Member {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
-	
 	
 	public String getMemberId() {
 		return memberId;
