@@ -89,9 +89,25 @@ public class MemberService {
 			System.out.println("등록일 : " + member.getStartDate());
 			System.out.println("등록 기간 : " + member.getDuration() + "개월");
 			System.out.println("종료일 : " + member.getEndDate());
-			System.out.println("레벨 테스트 신청 : " + member.getTestApply());
-			System.out.println("레벨 테스트 승인 : " + member.getTestApprove());
-			System.out.println("레벨 테스트 결과 : " + member.getTestResult());
+			
+			if(member.getTestApply() == null) {
+				System.out.println("레벨 테스트 신청 : X");
+			}else {
+				System.out.println("레벨 테스트 신청 : " + member.getTestApply());
+			}
+			
+			if(member.getTestApprove() == null) {
+				System.out.println("레벨 테스트 승인 : X");
+			}else {
+				System.out.println("레벨 테스트 승인 : " + member.getTestApprove());
+			}
+			
+			if(member.getTestResult() == null) {
+				System.out.println("레벨 테스트 결과 : X");
+			}else {
+				System.out.println("레벨 테스트 결과 : " + member.getTestResult());
+			}
+			
 		}
 	}
 
@@ -127,8 +143,9 @@ public class MemberService {
 	//수강신청 전 수강 등록내역 유무 확인
 	public void checkCourse() {
 		Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
+		//수강 내역 있음
 		if(MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId()) != null ) {
-			//수강 내역 있음
+			//현재날짜, 종료일 비교
 			Date now = new Date();
 			Date endCheck2 = new Date();
 			String endCheck = member.getEndDate();
@@ -140,17 +157,16 @@ public class MemberService {
 				e.printStackTrace();
 			}
 			int compare = now.compareTo(endCheck2);
-			if(compare > 0 ) {
-				//수강 완료 - 종료일 지남 - 재 신청 가능
-				System.out.println("수강 완료하여 새 강의 신청이 가능합니다.");
+			if(compare > 0) {
+				//수강 완료 - 종료일 지남 - 재 신청 가능 - 새 수강신청 메서드
 				updateCourse();
 			}else {
-				//수강 진행 중
+				//수강 진행 중 - 종료일 남았음
 				System.out.println("현재 수강 중 입니다.");
 				System.out.println(member.getLevelName() + " 레벨, " + member.getDuration() + "개월 과정");
 			}
 		}else {
-			//수강 내역 없음 - 신청 가능
+			//수강 내역 없음 - 신청 가능 - 수강신청 메서드
 			insertCourse();
 		}
 	}
@@ -185,7 +201,7 @@ public class MemberService {
 		}
 	}
 
-	//새 수강 신청 update
+	//새 수강 신청 - update
 	public void updateCourse() {
 		System.out.println("[ 수 강 신 청 ]");
 		System.out.println("▽ 수강 레벨을 선택하세요.");
@@ -214,7 +230,7 @@ public class MemberService {
 			System.out.println("수강 신청 실패");
 		}
 	}
-	//레벨 테스트 신청
+	//레벨 테스트 신청 -> 관리자 승인 -> 테스트 진행
 	//수강 2개월 이상 and 종료일 이후 - 신청 가능
 	public void testApply() {
 		Member member = MemberDAO.getInstance().getCourseInfo(memberInfo.getMemberId());
@@ -227,7 +243,7 @@ public class MemberService {
 				System.out.println("관리자 승인이 완료되었습니다.");
 				System.out.println(member.getLevelName() +" 레벨 테스트 진행 가능합니다.");
 				System.out.println();
-				//레벨 테스트
+				//레벨 테스트 메서드 실행
 				takeTest(member.getLevelId());
 			} else {
 				System.out.println("이미 신청되었습니다. 관리자 승인을 기다려주세요.");
@@ -244,6 +260,8 @@ public class MemberService {
 				e.printStackTrace();
 			}
 			int compare = now.compareTo(endCheck2);
+			
+			//수강 2개월 이상 and 종료일 이후
 			if((compare > 0) && (member.getDuration() ==2)) {
 				//종료일 지남 - 테스트 신청 가능
 				System.out.println("레벨 테스트 신청 가능합니다.");
@@ -261,12 +279,12 @@ public class MemberService {
 				}
 			}else if((compare < 0) && (member.getDuration() ==2)){
 				//종료 전 - 신청 불가
-				System.out.println("수강 코스 당 2개월 수강 후 신청 가능합니다. 종료일을 확인하세요.");
-				System.out.println("현재 " + member.getDuration() + "개월  과정 수강 중, 종료일 : " + member.getEndDate());
+				System.out.println("수강 코스 2개월 수강 후 신청 가능합니다. 종료일을 확인하세요.");
+				System.out.println("현재 " + member.getDuration() + "개월 과정 수강 중, 종료일 : " + member.getEndDate());
 			}else if(member.getDuration() ==1) {
-				//등록 기간 부족 - 신청 불가
-				System.out.println("수강 코스 당 2개월 수강 후 신청 가능합니다. \n(1개월 추가 등록 필요)");
-				System.out.println("현재 " + member.getDuration() + "개월  과정 수강 중, 종료일 : " + member.getEndDate());
+				//수강 기간 부족 - 신청 불가
+				System.out.println("수강 코스 2개월 수강 후 신청 가능합니다. \n(추가 등록 필요)");
+				System.out.println(member.getDuration() + "개월 과정 수강, 종료일 : " + member.getEndDate());
 			}
 		}
 	}
@@ -376,7 +394,7 @@ public class MemberService {
 	    int memAnswer3 = Integer.parseInt(sc.nextLine());
 	    System.out.println();
 
-	    // 정답 확인
+	    // 테스트 확인
 	    if (memAnswer1 == answer1 && memAnswer2 == answer2 && memAnswer3 == answer3) {
 	        System.out.println("축하합니다! 레벨 테스트를 통과하셨습니다.");
 	        // 테스트 결과 업데이트
@@ -387,11 +405,11 @@ public class MemberService {
 	            System.out.println("레벨 테스트 처리 실패");
 	        }
 	    } else {
-	        System.out.println("레벨 테스트를 통과하지 못하셨습니다. 다시 시도해주세요.");
 	        incorrectCount += (memAnswer1 != answer1) ? 1 : 0;
 	        incorrectCount += (memAnswer2 != answer2) ? 1 : 0;
 	        incorrectCount += (memAnswer3 != answer3) ? 1 : 0;
 	        System.out.println(incorrectCount + "개 틀렸습니다.");
+	        System.out.println("레벨 테스트를 통과하지 못하셨습니다. 다시 시도해주세요.");
 	    }
 	}
 

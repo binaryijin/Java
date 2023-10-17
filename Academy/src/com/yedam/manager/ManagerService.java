@@ -22,9 +22,25 @@ public class ManagerService {
 			System.out.println("등록일 : " + list.get(i).getStartDate());
 			System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 			System.out.println("종료일 : " + list.get(i).getEndDate());
-			System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
-			System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
-			System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
+			
+			if(list.get(i).getTestApply() == null) {
+				System.out.println("레벨 테스트 신청 : X");
+			}else {
+				System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
+			}
+			
+			if(list.get(i).getTestApprove() == null) {
+				System.out.println("레벨 테스트 승인 : X");
+			}else {
+				System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
+			}
+			
+			if(list.get(i).getTestResult() == null) {
+				System.out.println("레벨 테스트 결과 : X");
+			}else {
+				System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
+			}
+			
 		}
 	}
 
@@ -39,16 +55,16 @@ public class ManagerService {
 
 		switch (courseMenu) {
 		case 1:
-			System.out.println("Beginner 레벨의 수강생 목록입니다.");
+			System.out.println("[ Beginner 레벨 ]");
 			break;
 		case 2:
-			System.out.println("Basic 레벨의 수강생 목록입니다.");
+			System.out.println("[ Basic 레벨 ]");
 			break;
 		case 3:
-			System.out.println("Intermediate 레벨의 수강생 목록입니다.");
+			System.out.println("[ Intermediate 레벨 ]");
 			break;
 		case 4:
-			System.out.println("Advanced 레벨의 수강생 목록입니다.");
+			System.out.println("[ Advanced 레벨 ]");
 			break;
 		default:
 			System.out.println("잘못 입력하셨습니다.");
@@ -64,9 +80,24 @@ public class ManagerService {
 				System.out.println("등록일 : " + list.get(i).getStartDate());
 				System.out.println("등록 기간 : " + list.get(i).getDuration() + "개월");
 				System.out.println("종료일 : " + list.get(i).getEndDate());
-				System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
-				System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
-				System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
+				
+				if(list.get(i).getTestApply() == null) {
+					System.out.println("레벨 테스트 신청 : X");
+				}else {
+					System.out.println("레벨 테스트 신청 : " + list.get(i).getTestApply());
+				}
+				
+				if(list.get(i).getTestApprove() == null) {
+					System.out.println("레벨 테스트 승인 : X");
+				}else {
+					System.out.println("레벨 테스트 승인 : " + list.get(i).getTestApprove());
+				}
+				
+				if(list.get(i).getTestResult() == null) {
+					System.out.println("레벨 테스트 결과 : X");
+				}else {
+					System.out.println("레벨 테스트 결과 : " + list.get(i).getTestResult());
+				}
 			}
 		}else {
 			System.out.println("해당 레벨의 수강생이 없습니다.");
@@ -129,25 +160,27 @@ public class ManagerService {
 		String id = sc.nextLine();
 
 		int result = 0;
-
-		Member member = MemberDAO.getInstance().login(id);
-		if(member == null) {
-			System.out.println("존재하지 않는 ID 입니다.");
+		if(id.equals("manager")) {
+			System.out.println("관리자 계정은 삭제할 수 없습니다.");
 		}else {
-			System.out.println("ID " + id + " 를 삭제하시겠습니까?");
-			System.out.println("1. 삭제 | 2. 취소");
-			int selectNo = Integer.parseInt(sc.nextLine());
-			if(selectNo == 1) {
-				result = ManagerDAO.getInstance().deleteMember(id);
-			}else if(selectNo == 2) {
+			Member member = MemberDAO.getInstance().login(id);
+			if(member == null) {
+				System.out.println("존재하지 않는 ID 입니다.");
+			}else {
+				System.out.println("ID " + id + " 를 삭제하시겠습니까?");
+				System.out.println("1. 삭제 | 2. 취소");
+				int selectNo = Integer.parseInt(sc.nextLine());
+				if(selectNo == 1) {
+					result = ManagerDAO.getInstance().deleteMember(id);
+				}else if(selectNo == 2) {
+				}
 			}
 		}
 		if(result > 0) {
 			System.out.println("수강생 ID " + id + " 가 삭제되었습니다.");
 		}else {
-			System.out.println("수강생 삭제 실패");
+			System.out.println("(수강생 삭제 실패)");
 		}
 	}
-
 
 }
